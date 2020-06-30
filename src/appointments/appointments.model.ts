@@ -1,7 +1,7 @@
 import {Entity, Column, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm'
 import User from '../users/users.model'
 @Entity('appointments')
-export default class Model{
+export default class Appointment{
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

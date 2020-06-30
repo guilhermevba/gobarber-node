@@ -11,5 +11,5 @@
   "cli": {
     "migrationsDir": "./src/database/migrations"
   },
-  "entities": ["./src/appointments/appointment.model.ts"]
+  "entities": ["./src/appointments/appointments.model.ts", "./src/users/users.model.ts"]
 }

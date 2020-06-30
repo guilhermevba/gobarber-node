@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { parseISO } from 'date-fns'
 import { getCustomRepository} from 'typeorm'
-import AppointmentsRepository from './appointment.repository'
+import AppointmentsRepository from './appointments.repository'
 import CreateAppointmentService from './services/CreateAppointmentService'
 
 
