@@ -14,14 +14,11 @@ export class CreateAppointments1593380095192 implements MigrationInterface {
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()'
           }, {
-            name: 'provider',
+            name: 'provider_id',
             type: 'varchar'
           }, {
             name: 'date',
             type: 'timestamp with time zone'
-          }, {
-            name: 'password',
-            type: 'varchar'
           }, {
             name: 'created_at',
             type: 'timestamp',

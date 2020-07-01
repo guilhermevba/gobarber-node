@@ -8,6 +8,7 @@ userRouter.post('/', async (request, response) => {
     const { name, email, password } = request.body
     const createUserService = new CreateUserService()
     const user = await createUserService.execute({name, email, password})
+    delete user.password
     response.json(user)
   } catch(err) {
     response.status(400).json({error: err.message})

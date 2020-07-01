@@ -9,12 +9,12 @@ const appointmentsRouter = Router()
 
 appointmentsRouter.post('/', async (req, res) => {
   try{
-    const { provider, date } = req.body
+    const { provider_id, date } = req.body
     const parsedDate = parseISO(date)
 
     const createAppointment = new CreateAppointmentService()
 
-    const appointment = await createAppointment.execute({provider, date: parsedDate})
+    const appointment = await createAppointment.execute({provider_id, date: parsedDate})
     res.send(appointment)
   } catch (err) {
     return res.status(400).json({error: err.message})
