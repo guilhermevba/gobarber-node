@@ -3,9 +3,10 @@ import { parseISO } from 'date-fns'
 import { getCustomRepository} from 'typeorm'
 import AppointmentsRepository from './appointments.repository'
 import CreateAppointmentService from './services/CreateAppointmentService'
-
+import ensureAuthenticated from '../middlewares/ensureAuthenticated'
 
 const appointmentsRouter = Router()
+appointmentsRouter.use(ensureAuthenticated)
 
 appointmentsRouter.post('/', async (req, res) => {
   try{

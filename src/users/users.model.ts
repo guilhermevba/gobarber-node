@@ -13,6 +13,9 @@ export default class User{
   @Column()
   public password!: string;
 
+  @Column()
+  public avatar: string;
+
   @CreateDateColumn()
   public created_at: Date;
 
