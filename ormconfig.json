@@ -6,10 +6,10 @@
   "password": "gostack",
   "database": "gostack_gobarber",
   "migrations": [
-    "./src/database/migrations/*.ts"
+    "./src/shared/infra/typeorm/migrations/*.ts"
   ],
   "cli": {
-    "migrationsDir": "./src/database/migrations"
+    "migrationsDir": "./src/shared/infra/typeorm/migrations"
   },
-  "entities": ["./src/appointments/appointments.model.ts", "./src/users/users.model.ts"]
+  "entities": ["./src/modules/**/infra/entities/*.ts"]
 }
