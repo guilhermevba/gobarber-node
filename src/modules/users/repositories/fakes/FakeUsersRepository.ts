@@ -19,7 +19,7 @@ export default class UsersRepository implements IUsersRepository {
 
   public async create({email, name, password}: ICreateUserDTO): Promise<User> {
     const user = new User()
-    Object.assign(user, {id: uuid, email, name, password})
+    Object.assign(user, {id: uuid(), email, name, password})
     this.users.push(user)
     return user
   }
