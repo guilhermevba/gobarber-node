@@ -1,4 +1,4 @@
-import User from '@users/infra/typeorm/entities/users.model'
+import User from '@users/infra/http/typeorm/entities/users.model'
 import IUsersRepository from "@users/repositories/IUsersRepository";
 import ICreateUserDTO from '@users/dto/ICreateUserDTO';
 import {uuid} from 'uuidv4'

@@ -39,6 +39,6 @@ describe('Update User`s avatar', () => {
     const updateAvatarService = new UpdateUserAvatarService(fakeUsersRepository, fakeStorageProvider)
 
     const promiseUpdate = updateAvatarService.execute({ user_id: '123', avatarFilename: 'usersavatarfilename'})
-    expect(promiseUpdate).rejects.toBeInstanceOf(AppError)
+    await expect(promiseUpdate).rejects.toBeInstanceOf(AppError)
   })
 })

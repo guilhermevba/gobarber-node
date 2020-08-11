@@ -19,7 +19,7 @@ describe('Create User', () => {
 
     const createUserService = new CreateUserService(fakeUsersRepository, fakeHashProvider)
     await createUserService.execute({ password: '123', name: 'John', email: 'test@email.com'})
-    expect(
+    await expect(
       createUserService.execute({ password: '123', name: 'Peter', email: 'test@email.com'})
     ).rejects.toBeInstanceOf(AppError)
   })

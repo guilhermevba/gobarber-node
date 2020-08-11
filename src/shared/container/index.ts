@@ -6,5 +6,5 @@ import AppointmentsRepository from '@appointments/infra/typeorm/repositories/App
 container.registerSingleton<IAppointmentsRepository>('AppointmentsRepository', AppointmentsRepository)
 
 import IUsersRepository from '@users/repositories/IUsersRepository'
-import UsersRepository from '@users/infra/typeorm/repositories/UsersRepository'
+import UsersRepository from '@users/infra/http/typeorm/repositories/UsersRepository'
 container.registerSingleton<IUsersRepository>('UsersRepository', UsersRepository)
