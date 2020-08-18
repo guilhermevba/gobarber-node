@@ -1,5 +1,5 @@
 import IUserTokensRepository from "../IUserTokensRepository";
-import UserToken from "../../infra/typeorm/entities/UserToken";
+import UserToken from "../../infra/http/typeorm/entities/UserToken";
 import { uuid } from "uuidv4";
 
 export default class FakeUserTokensRepository implements IUserTokensRepository{

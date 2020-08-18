@@ -9,7 +9,6 @@ interface tokenPayload {
   sub: string
 }
 
-
 export default  (request: Request, response: Response, next: NextFunction): void => {
   const { authorization } = request.headers
   if (!authorization) {

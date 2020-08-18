@@ -1,5 +1,5 @@
 import {Entity, Column, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm'
-import User from '@users/infra/typeorm/entities/users.model'
+import User from '@users/infra/http/typeorm/entities/User'
 
 @Entity('appointments')
 export default class Appointment{

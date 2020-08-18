@@ -1,6 +1,7 @@
 import IUsersRepository from '@users/repositories/IUsersRepository'
 import {inject, injectable} from 'tsyringe'
-import IMailProvider from '@users/providers/MailProvider/models/IMailProvider'
+import path from 'path'
+import IMailProvider from '@shared/providers/MailProvider/models/IMailProvider'
 import AppError from '@shared/errors/appError'
 import IUserTokensRepository from '@users/repositories/IUserTokensRepository'
 
@@ -27,11 +28,19 @@ export default class SendForgotPasswordEmailService{
       throw new AppError('User not found')
     }
 
-    await this.userTokensRepository.generate(foundUser.id)
-
-    this.mailProvider.sendMail(
-      email,
-      "you forgot your password"
+    const {token} = await this.userTokensRepository.generate(foundUser.id)
+    const forgotPasswordMailTemplateFile = path.resolve(__dirname, '..', 'views', 'forgot_password.hbs')
+    await this.mailProvider.sendMail({
+      subject: '(Go Barber) Recuperação de senha',
+      templateData: {
+        file: forgotPasswordMailTemplateFile,
+        variables: {link: `http://localhost:3000/reset_password?token=${token}`, name: foundUser.name}
+      },
+      to: {
+        name: foundUser.name,
+        email: foundUser.email
+      }
+    }
     )
   }
 }

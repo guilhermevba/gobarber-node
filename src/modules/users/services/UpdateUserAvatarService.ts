@@ -1,6 +1,5 @@
 
-import User from '../infra/typeorm/entities/users.model'
-import uploadConfig from '@config/upload'
+import User from '../infra/http/typeorm/entities/User'
 import AppError from '@shared/errors/appError'
 import IUsersRepository from '@users/repositories/IUsersRepository'
 import {inject, injectable} from 'tsyringe'

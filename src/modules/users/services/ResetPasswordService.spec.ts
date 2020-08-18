@@ -1,5 +1,5 @@
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository'
-import FakeMailProvider from '@users/providers/MailProvider/fakes/FakeMailProvider'
+import FakeMailProvider from '@shared/providers/MailProvider/fakes/FakeMailProvider'
 import FakeUserTokensRepository from '@users/repositories/fakes/FakeUserTokensRepository'
 import FakeHashProvider from '@users/providers/HashProvider/fakes/FakeHashProvider'
 import ResetPasswordService from './ResetPasswordService'

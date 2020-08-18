@@ -1,4 +1,4 @@
-import User from '@users/infra/http/typeorm/entities/users.model'
+import User from '@users/infra/http/typeorm/entities/User'
 import IUsersRepository from "@users/repositories/IUsersRepository";
 import ICreateUserDTO from '@users/dto/ICreateUserDTO';
 import {uuid} from 'uuidv4'
@@ -20,6 +20,7 @@ export default class UsersRepository implements IUsersRepository {
   public async create({email, name, password}: ICreateUserDTO): Promise<User> {
     const user = new User()
     Object.assign(user, {id: uuid(), email, name, password})
+
     this.users.push(user)
     return user
   }

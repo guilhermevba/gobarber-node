@@ -29,7 +29,6 @@ export default class ResetPasswordService{
       throw new AppError('user`s token not found')
     }
 
-
     const user = await this.usersRepository.findById(userToken.user_id)
 
     if (!user) {

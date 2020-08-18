@@ -1,4 +1,4 @@
-import User from '../infra/typeorm/entities/users.model'
+import User from '../infra/http/typeorm/entities/User'
 import AppError from '@shared/errors/appError'
 import IUsersRepository from '@users/repositories/IUsersRepository'
 import {inject, injectable} from 'tsyringe'
@@ -21,6 +21,7 @@ export default class CreateUserService{
     ) {}
 
   public async execute({name, email, password}: Request): Promise<User> {
+    console.log(name, email, password)
     const existingEmail = await this.usersRepository.findByEmail(email)
     if (existingEmail) {
       throw new AppError('Email address already in use')

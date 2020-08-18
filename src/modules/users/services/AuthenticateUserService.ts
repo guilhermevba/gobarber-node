@@ -1,5 +1,5 @@
 import { sign } from 'jsonwebtoken'
-import User from '../infra/typeorm/entities/users.model'
+import User from '../infra/http/typeorm/entities/User'
 import authConfig from '@config/auth'
 import AppError from '@shared/errors/appError'
 import IUsersRepository from '@users/repositories/IUsersRepository'

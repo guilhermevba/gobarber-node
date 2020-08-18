@@ -23,7 +23,7 @@
 **RNF**
 
 **RN**
-- Usuário não pode alterar seu email para um email já atualizado
+- Usuário não pode alterar seu email para um email já utilizado
 - Para atualizar sua senha o usuário deve confirmar com a senha antiga
 - Para atualizar sua senha o usuário deve confirmar a senha (digitar 2 vezes)
 -
