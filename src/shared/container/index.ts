@@ -3,7 +3,7 @@ import '@users/providers'
 import '../providers'
 
 import IAppointmentsRepository from '@appointments/repositories/IAppointmentsRepository'
-import AppointmentsRepository from '@appointments/infra/http/typeorm/repositories/AppointmentsRepository'
+import AppointmentsRepository from '@appointments/infra/typeorm/repositories/AppointmentsRepository'
 container.registerSingleton<IAppointmentsRepository>('AppointmentsRepository', AppointmentsRepository)
 
 import IUsersRepository from '@users/repositories/IUsersRepository'

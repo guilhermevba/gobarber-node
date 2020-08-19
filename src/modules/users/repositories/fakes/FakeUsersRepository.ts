@@ -2,6 +2,7 @@ import User from '@users/infra/http/typeorm/entities/User'
 import IUsersRepository from "@users/repositories/IUsersRepository";
 import ICreateUserDTO from '@users/dto/ICreateUserDTO';
 import {uuid} from 'uuidv4'
+import { IFindAllUsersDTO } from '@users/dto/IFindAllUsersDTO';
 
 export default class UsersRepository implements IUsersRepository {
 
@@ -28,6 +29,10 @@ export default class UsersRepository implements IUsersRepository {
     const findIndex = this.users.findIndex(({id}) => id === user.id)
     this.users[findIndex] = user
     return this.users[findIndex]
+  }
+
+  public async findAllUsers({except_user_id}: IFindAllUsersDTO): Promise<User[]> {
+    return this.users.filter(user => user.id !== except_user_id)
   }
 
 }
