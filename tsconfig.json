@@ -12,6 +12,7 @@
 
     "baseUrl": "./src",
     "paths": {
+      "@notifications/*": ["./modules/notifications/*"],
       "@appointments/*": ["./modules/appointments/*"],
       "@users/*": ["./modules/users/*"],
       "@config/*": ["./config/*"],

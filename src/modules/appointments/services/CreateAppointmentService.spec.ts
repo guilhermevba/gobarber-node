@@ -3,9 +3,11 @@ import CreateAppointmentService from './CreateAppointmentService'
 import AppError from '@shared/errors/appError'
 import FakeUsersRepository from '@users/repositories/fakes/FakeUsersRepository'
 import User from '@users/infra/http/typeorm/entities/User'
+import FakeNotificationsRepository from '@notifications/repositories/fakes/FakeNotificationsRepository'
 
 let fakeAppointmentRepository: FakeAppointmentRepository,
 fakeUsersRepository: FakeUsersRepository,
+fakeNotificationsRepository: FakeNotificationsRepository,
 createAppointmentService: CreateAppointmentService,
 user: User,
 provider: User
@@ -15,7 +17,8 @@ describe('Create Appointment', () => {
   beforeEach(async () => {
     fakeAppointmentRepository = new FakeAppointmentRepository()
     fakeUsersRepository = new FakeUsersRepository()
-    createAppointmentService = new CreateAppointmentService(fakeAppointmentRepository, fakeUsersRepository)
+    fakeNotificationsRepository = new FakeNotificationsRepository()
+    createAppointmentService = new CreateAppointmentService(fakeAppointmentRepository, fakeUsersRepository, fakeNotificationsRepository)
 
     user = await fakeUsersRepository.create({
       name: 'guilherme',
