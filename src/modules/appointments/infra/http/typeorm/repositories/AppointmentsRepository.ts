@@ -4,12 +4,19 @@ import IAppointmentsRepository from '@appointments/repositories/IAppointmentsRep
 import createAppointmentDTO from '@appointments/dto/ICreateAppointmentDTO'
 import IFindAllInMonthOfProviderDTO from '@appointments/dto/IFindAllInMonthOfProviderDTO'
 import IFindAllInDayOfProviderDTO from '@appointments/dto/IFindAllInDayOfProviderDTO'
+import IFindByProviderAndDateDTO from '@appointments/dto/IFindByProviderAndDateDTO'
 
 export default class AppointmentRepository implements IAppointmentsRepository {
   private ormRepository: Repository<Appointment>
 
   constructor(){
     this.ormRepository = getRepository(Appointment)
+  }
+  public async findByProviderAndDate({date, providerId}: IFindByProviderAndDateDTO): Promise<Appointment | undefined> {
+    const findAppointment = await this.ormRepository.findOne({
+      where: { date, provider_id: providerId }
+    })
+    return findAppointment
   }
 
   public async create({provider_id, user_id, date}: createAppointmentDTO): Promise<Appointment> {
@@ -19,7 +26,6 @@ export default class AppointmentRepository implements IAppointmentsRepository {
   }
 
   public async findByDate(date: Date): Promise<Appointment | undefined> {
-
     const findAppointment = await this.ormRepository.findOne({
       where: { date }
     })

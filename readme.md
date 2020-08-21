@@ -54,10 +54,10 @@
 
 **RN**
 - Cada agendamento deve durar 1h exatamente
-- Os agendamentos devem estar disponíveis entre 8h-18h (ultimo horario as 17h)
-- O usuário não pode agendar em um horario já ocupado
 - O usuário não pode fazer um agendamento no passado
 - O usuário não pode agendar um horario consigo
+- Os agendamentos devem estar disponíveis entre 8h-18h (ultimo horario as 17h)
+- O usuário não pode agendar em um horario já ocupado
 
 
 -----

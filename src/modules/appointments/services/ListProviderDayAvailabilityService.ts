@@ -33,10 +33,10 @@ const CheckAvailability = (now: number, appointments: Appointment[], day: number
 }
 
 @injectable()
-export default class ListProviderDayAvailability {
+export default class ListProviderDayAvailabilityService {
 
   constructor(
-    @inject('AppointmentRepository')
+    @inject('AppointmentsRepository')
     private appointmentRepository : IAppointmentsRepository
   ) {}
 

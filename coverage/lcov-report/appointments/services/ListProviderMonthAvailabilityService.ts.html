@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/46</span>
+                <span class='fraction'>0/51</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/46</span>
+                <span class='fraction'>0/51</span>
             </div>
         
             
@@ -103,7 +103,17 @@
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -151,9 +161,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
 <span class="cstat-no" title="statement not covered" >import {inject, injectable} from 'tsyringe'</span>
-<span class="cstat-no" title="statement not covered" >import {getDaysInMonth, getDate} from 'date-fns'</span>
+<span class="cstat-no" title="statement not covered" >import {getDaysInMonth, getDate, isAfter, getMonth} from 'date-fns'</span>
 <span class="cstat-no" title="statement not covered" >import IAppointmentsRepository from '@appointments/repositories/IAppointmentsRepository';</span>
-<span class="cstat-no" title="statement not covered" >import Appointment from '@appointments/infra/typeorm/entitites/Appointment'</span>
+<span class="cstat-no" title="statement not covered" >import Appointment from '@appointments/infra/http/typeorm/entities/appointment'</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >interface Request{</span>
 <span class="cstat-no" title="statement not covered" >  provider_id: string,</span>
@@ -167,14 +177,18 @@
 <span class="cstat-no" title="statement not covered" >}&gt;;</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >const checkIfAvaliable = (appointments: Appointment[]) =&gt; (day: number) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  return appointments.filter(({date}) =&gt; getDate(date) === day).length &lt; 10</span>
+<span class="cstat-no" title="statement not covered" >  const today = getDate(Date.now())</span>
+<span class="cstat-no" title="statement not covered" >  return (</span>
+<span class="cstat-no" title="statement not covered" >    isAfter(day, today) &amp;&amp;</span>
+<span class="cstat-no" title="statement not covered" >    appointments.filter(({date}) =&gt; getDate(date) === day).length &lt; 10</span>
+<span class="cstat-no" title="statement not covered" >  )</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >@injectable()</span>
-<span class="cstat-no" title="statement not covered" >export default class ListPRoviderMonthAvailabilityService {</span>
+<span class="cstat-no" title="statement not covered" >export default class ListProviderMonthAvailabilityService {</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  constructor(</span>
-<span class="cstat-no" title="statement not covered" >    @inject('AppointmentRepository')</span>
+<span class="cstat-no" title="statement not covered" >    @inject('AppointmentsRepository')</span>
 <span class="cstat-no" title="statement not covered" >    private appointmentRepository : IAppointmentsRepository</span>
 <span class="cstat-no" title="statement not covered" >  ) {}</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -185,11 +199,12 @@
 <span class="cstat-no" title="statement not covered" >    const numberOfDaysInMonth = getDaysInMonth(new Date(year, month -1, 1))</span>
 <span class="cstat-no" title="statement not covered" >    const availability = []</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const checkIfDayAvailable = checkIfAvaliable(appointments)</span>
+<span class="cstat-no" title="statement not covered" >    const dayIsAvailable = checkIfAvaliable(appointments)</span>
+<span class="cstat-no" title="statement not covered" >    const thisMonth = getMonth(Date.now())</span>
 <span class="cstat-no" title="statement not covered" >    for (let day = 1; day &lt;= numberOfDaysInMonth; day ++) {</span>
 <span class="cstat-no" title="statement not covered" >      availability.push({</span>
 <span class="cstat-no" title="statement not covered" >        day,</span>
-<span class="cstat-no" title="statement not covered" >        available: checkIfDayAvailable(day)</span>
+<span class="cstat-no" title="statement not covered" >        available: isAfter(month, thisMonth) &amp;&amp; dayIsAvailable(day)</span>
 <span class="cstat-no" title="statement not covered" >      })</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >    return availability</span>
@@ -202,7 +217,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Aug 19 2020 14:33:30 GMT-0300 (Brasilia Standard Time)
+                at Fri Aug 21 2020 09:13:35 GMT-0300 (Brasilia Standard Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

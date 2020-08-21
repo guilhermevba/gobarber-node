@@ -1,6 +1,6 @@
 
 import {inject, injectable} from 'tsyringe'
-import {getDaysInMonth, getDate} from 'date-fns'
+import {getDaysInMonth, getDate, isAfter, getMonth} from 'date-fns'
 import IAppointmentsRepository from '@appointments/repositories/IAppointmentsRepository';
 import Appointment from '@appointments/infra/http/typeorm/entities/appointment'
 
@@ -16,14 +16,18 @@ type IResponse = Array<{
 }>;
 
 const checkIfAvaliable = (appointments: Appointment[]) => (day: number) => {
-  return appointments.filter(({date}) => getDate(date) === day).length < 10
+  const today = getDate(Date.now())
+  return (
+    isAfter(day, today) &&
+    appointments.filter(({date}) => getDate(date) === day).length < 10
+  )
 }
 
 @injectable()
-export default class ListPRoviderMonthAvailabilityService {
+export default class ListProviderMonthAvailabilityService {
 
   constructor(
-    @inject('AppointmentRepository')
+    @inject('AppointmentsRepository')
     private appointmentRepository : IAppointmentsRepository
   ) {}
 
@@ -34,11 +38,12 @@ export default class ListPRoviderMonthAvailabilityService {
     const numberOfDaysInMonth = getDaysInMonth(new Date(year, month -1, 1))
     const availability = []
 
-    const checkIfDayAvailable = checkIfAvaliable(appointments)
+    const dayIsAvailable = checkIfAvaliable(appointments)
+    const thisMonth = getMonth(Date.now())
     for (let day = 1; day <= numberOfDaysInMonth; day ++) {
       availability.push({
         day,
-        available: checkIfDayAvailable(day)
+        available: isAfter(month, thisMonth) && dayIsAvailable(day)
       })
     }
     return availability

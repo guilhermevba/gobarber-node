@@ -5,8 +5,10 @@ import {uuid} from 'uuidv4'
 import {isEqual, getMonth, getYear, getDate} from 'date-fns'
 import IFindAllInMonthOfProviderDTO from '@appointments/dto/IFindAllInMonthOfProviderDTO'
 import IFindAllInDayOfProviderDTO from '@appointments/dto/IFindAllInDayOfProviderDTO'
+import IFindByProviderAndDateDTO from '@appointments/dto/IFindByProviderAndDateDTO'
 
 export default class AppointmentRepository implements IAppointmentsRepository {
+
   private appointments: Appointment[] = []
 
   public async create({provider_id, user_id, date}: createAppointmentDTO): Promise<Appointment> {
@@ -19,6 +21,11 @@ export default class AppointmentRepository implements IAppointmentsRepository {
 
   public async findByDate(date: Date): Promise<Appointment | undefined> {
     const appointment = this.appointments.find((appointment) => isEqual(appointment.date, date))
+    return appointment
+  }
+
+  public async findByProviderAndDate({date, providerId}: IFindByProviderAndDateDTO): Promise<Appointment | undefined> {
+    const appointment = this.appointments.find((appointment) => isEqual(appointment.date, date) && appointment.provider_id === providerId)
     return appointment
   }
 
