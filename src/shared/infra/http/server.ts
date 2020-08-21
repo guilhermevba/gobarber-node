@@ -1,5 +1,6 @@
 import express, { NextFunction, Response, Request } from 'express'
 import { errors } from 'celebrate'
+import 'dotenv/config'
 import 'express-async-errors'
 import '../typeorm'
 import routes from './routes'

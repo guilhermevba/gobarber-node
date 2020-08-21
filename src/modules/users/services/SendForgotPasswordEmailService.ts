@@ -34,7 +34,7 @@ export default class SendForgotPasswordEmailService{
       subject: '(Go Barber) Recuperação de senha',
       templateData: {
         file: forgotPasswordMailTemplateFile,
-        variables: {link: `http://localhost:3000/reset_password?token=${token}`, name: foundUser.name}
+        variables: {link: `${process.env.APP_WEB_URL}/reset_password?token=${token}`, name: foundUser.name}
       },
       to: {
         name: foundUser.name,
