@@ -2,7 +2,7 @@
 import {inject, injectable} from 'tsyringe'
 import {getHours, isAfter } from 'date-fns'
 import IAppointmentsRepository from '@appointments/repositories/IAppointmentsRepository';
-import Appointment from '@appointments/infra/typeorm/entitites/Appointment'
+import Appointment from '@appointments/infra/http/typeorm/entitites/Appointment'
 
 interface Request{
   provider_id: string,
@@ -17,9 +17,6 @@ type IResponse = Array<{
 }>;
 
 const CheckAvailability = (now: number, appointments: Appointment[], day: number, month: number, year: number, hour = 8): IResponse => {
-  console.log(new Date(year, month, day, hour, 0))
-  console.log(new Date(now))
-  console.log(isAfter(new Date(year, month, day, hour, 0), new Date(now)))
   const available = isAfter(new Date(year, month, day, hour, 0), now) && !appointments.some(({date}) => getHours(date) === hour)
   if (hour === 17) {
     return [{

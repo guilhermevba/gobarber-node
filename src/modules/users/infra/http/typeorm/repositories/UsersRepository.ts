@@ -27,7 +27,7 @@ export default class UsersRepository implements IUsersRepository {
 
   public async findAllUsers({except_user_id}: IFindAllUsersDTO): Promise<User[]> {
     const users = await this.ormRepository.find({
-      where: Not(except_user_id)
+      where: {id: Not(except_user_id)}
     })
     return users;
   }

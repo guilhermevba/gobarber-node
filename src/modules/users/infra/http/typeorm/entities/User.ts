@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm'
+import Appointment from '@appointments/infra/http/typeorm/entitites/Appointment';
 @Entity('users')
 export default class User{
   @PrimaryGeneratedColumn('uuid')

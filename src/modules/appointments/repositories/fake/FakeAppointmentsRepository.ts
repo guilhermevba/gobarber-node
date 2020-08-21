@@ -1,4 +1,4 @@
-import Appointment from '@appointments/infra/typeorm/entitites/Appointment'
+import Appointment from '@appointments/infra/http/typeorm/entitites/Appointment'
 import IAppointmentsRepository from '@appointments/repositories/IAppointmentsRepository'
 import createAppointmentDTO from '@appointments/dto/ICreateAppointmentDTO'
 import {uuid} from 'uuidv4'
@@ -9,9 +9,9 @@ import IFindAllInDayOfProviderDTO from '@appointments/dto/IFindAllInDayOfProvide
 export default class AppointmentRepository implements IAppointmentsRepository {
   private appointments: Appointment[] = []
 
-  public async create({provider_id, date}: createAppointmentDTO): Promise<Appointment> {
+  public async create({provider_id, user_id, date}: createAppointmentDTO): Promise<Appointment> {
     const appointment = new Appointment()
-    Object.assign(appointment, {id: uuid, provider_id, date})
+    Object.assign(appointment, {id: uuid(), provider_id, user_id, date})
 
     this.appointments.push(appointment)
     return appointment

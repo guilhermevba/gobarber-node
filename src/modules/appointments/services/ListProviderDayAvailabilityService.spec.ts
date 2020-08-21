@@ -16,14 +16,17 @@ describe('Update User`s avatar', () => {
     })
     await fakeAppointmentsRepository.create({
       provider_id: '1',
+      user_id: 'user',
       date: new Date(2020, 5, 10, 8, 0)
     })
     await fakeAppointmentsRepository.create({
       provider_id: '1',
+      user_id: 'user',
       date: new Date(2020, 5, 10, 9, 0)
     })
     await fakeAppointmentsRepository.create({
       provider_id: '1',
+      user_id: 'user',
       date: new Date(2020, 5, 10, 13, 0)
     })
 

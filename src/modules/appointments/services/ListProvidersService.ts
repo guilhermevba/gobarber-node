@@ -1,6 +1,5 @@
 
 import User from '@users/infra/http/typeorm/entities/User'
-import AppError from '@shared/errors/appError'
 import IUsersRepository from '@users/repositories/IUsersRepository'
 import {inject, injectable} from 'tsyringe'
 

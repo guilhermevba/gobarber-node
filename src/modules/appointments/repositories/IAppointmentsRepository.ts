@@ -1,4 +1,4 @@
-import Appointment from "@appointments/infra/typeorm/entitites/Appointment"
+import Appointment from "@appointments/infra/http/typeorm/entitites/Appointment"
 import createAppointmentDTO from "@appointments/dto/ICreateAppointmentDTO";
 import IFindAllInMonthOfProviderDTO from "@appointments/dto/IFindAllInMonthOfProviderDTO";
 import IFindAllInDayOfProviderDTO from "@appointments/dto/IFindAllInDayOfProviderDTO";
