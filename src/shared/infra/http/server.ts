@@ -1,4 +1,5 @@
 import express, { NextFunction, Response, Request } from 'express'
+import { errors } from 'celebrate'
 import 'express-async-errors'
 import '../typeorm'
 import routes from './routes'
@@ -16,6 +17,8 @@ app.get('/', (req, res) => {
   res.send('im alive')
 })
 app.use(routes)
+
+app.use(errors())
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if (err instanceof AppError) {
