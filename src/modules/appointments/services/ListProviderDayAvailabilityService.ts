@@ -2,7 +2,7 @@
 import {inject, injectable} from 'tsyringe'
 import {getHours, isAfter } from 'date-fns'
 import IAppointmentsRepository from '@appointments/repositories/IAppointmentsRepository';
-import Appointment from '@appointments/infra/http/typeorm/entitites/Appointment'
+import Appointment from '@appointments/infra/http/typeorm/entities/appointment'
 
 interface Request{
   provider_id: string,

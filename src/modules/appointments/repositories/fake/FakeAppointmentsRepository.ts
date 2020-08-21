@@ -1,4 +1,4 @@
-import Appointment from '@appointments/infra/http/typeorm/entitites/Appointment'
+import Appointment from '@appointments/infra/http/typeorm/entities/appointment'
 import IAppointmentsRepository from '@appointments/repositories/IAppointmentsRepository'
 import createAppointmentDTO from '@appointments/dto/ICreateAppointmentDTO'
 import {uuid} from 'uuidv4'
