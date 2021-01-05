@@ -12,7 +12,7 @@ const app = express();
 app.use(cors())
 app.use(express.json())
 
-app.use('/images',express.static(uploadConfig.directory))
+app.use('/files',express.static(uploadConfig.directory))
 app.get('/', (req, res) => {
   console.log('im alive')
   res.send('im alive')

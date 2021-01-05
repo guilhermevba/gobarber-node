@@ -15,10 +15,10 @@ class DiskStorageProvider implements IStorageProvider{
     const filePath = path.resolve(uploadConfig.directory, file)
     try{
       fs.promises.stat(filePath)
+      await fs.promises.unlink(filePath)
     } catch {
       return
     }
-    await fs.promises.unlink(filePath)
   }
 
 }
