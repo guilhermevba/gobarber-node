@@ -4,10 +4,12 @@ import AppError from '@shared/errors/appError'
 import FakeUsersRepository from '@users/repositories/fakes/FakeUsersRepository'
 import User from '@users/infra/http/typeorm/entities/User'
 import FakeNotificationsRepository from '@notifications/repositories/fakes/FakeNotificationsRepository'
+import FakeCacheProvider from '@shared/providers/CacheProvider/fakes/FakeCacheProvider'
 
 let fakeAppointmentRepository: FakeAppointmentRepository,
 fakeUsersRepository: FakeUsersRepository,
 fakeNotificationsRepository: FakeNotificationsRepository,
+fakeCacheProvider: FakeCacheProvider,
 createAppointmentService: CreateAppointmentService,
 user: User,
 provider: User
@@ -17,8 +19,9 @@ describe('Create Appointment', () => {
   beforeEach(async () => {
     fakeAppointmentRepository = new FakeAppointmentRepository()
     fakeUsersRepository = new FakeUsersRepository()
+    fakeCacheProvider = new FakeCacheProvider()
     fakeNotificationsRepository = new FakeNotificationsRepository()
-    createAppointmentService = new CreateAppointmentService(fakeAppointmentRepository, fakeUsersRepository, fakeNotificationsRepository)
+    createAppointmentService = new CreateAppointmentService(fakeAppointmentRepository, fakeUsersRepository, fakeNotificationsRepository, fakeCacheProvider)
 
     user = await fakeUsersRepository.create({
       name: 'guilherme',
@@ -77,13 +80,13 @@ describe('Create Appointment', () => {
     await expect(appointmentPromise).rejects.toBeInstanceOf(AppError)
   })
 
-  it('Should be able to create an appoitment before of 8h ', async () => {
+  it('Should not be able to create an appoitment before 8h ', async () => {
     const appointmentDate = new Date(2020, 10, 21, 6)
     const appointmentPromise = createAppointmentService.execute({provider_id: provider.id, user_id: user.id, date: appointmentDate})
     await expect(appointmentPromise).rejects.toBeInstanceOf(AppError)
   })
 
-  it('Should be able to create an appoitment after of 17h ', async () => {
+  it('Should not be able to create an appoitment after 17h ', async () => {
     const appointmentDate = new Date(2020, 10, 21, 18)
     const appointmentPromise = createAppointmentService.execute({provider_id: provider.id, user_id: user.id, date: appointmentDate})
     await expect(appointmentPromise).rejects.toBeInstanceOf(AppError)

@@ -144,7 +144,7 @@ module.exports = {
   testMatch: [
     "**/*.spec.ts",
   ],
-
+  moduleFileExtensions: ['ts', 'js', 'json', 'node'],
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
   //   "/node_modules/"

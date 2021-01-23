@@ -18,7 +18,7 @@ export default  (request: Request, response: Response, next: NextFunction): void
   const [, token] = authorization.split(' ')
 
   try{
-    const decoded = verify(token,authConfig.jwt.secret) as tokenPayload
+    const decoded = verify(token, authConfig.jwt.secret) as tokenPayload
 
     const { sub } = decoded
 

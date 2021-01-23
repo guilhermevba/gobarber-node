@@ -7,6 +7,7 @@ import AppError from '@shared/errors/appError'
 import IUsersRepository from '@users/repositories/IUsersRepository'
 import INotificationsRepository from '@notifications/repositories/INotificationsRepository'
 import appointmentsRouter from '@appointments/infra/http/appointments.routes'
+import ICacheProvider from '@shared/providers/CacheProvider/models/ICacheProvider'
 
 interface Request {
   provider_id: string,
@@ -23,7 +24,10 @@ class CreateAppointmentService {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
     @inject('NotificationsRepository')
-    private notificationsRepository: INotificationsRepository){}
+    private notificationsRepository: INotificationsRepository,
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider
+    ){}
 
   public async execute({provider_id, user_id, date}: Request): Promise<Appointment> {
 
@@ -62,6 +66,11 @@ class CreateAppointmentService {
       recipient_id: appointment.provider_id,
       content: `Novo agendamento para ${formatedDate}`
     })
+
+
+    await this.cacheProvider.invalidate(`provider-appointments:${provider_id}:${format(appointment.date, 'yyyy-M-d')}`)
+
+
     return appointment
   }
 }

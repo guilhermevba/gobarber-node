@@ -1,13 +1,16 @@
 import FakeUsersRepository from '@users/repositories/fakes/FakeUsersRepository'
 import ListProvidersService from './ListProvidersService'
+import FakeCacheProvider from '@shared/providers/CacheProvider/fakes/FakeCacheProvider'
 
 let fakeUsersRepository: FakeUsersRepository,
+fakeCacheProvider: FakeCacheProvider,
 listProvidersService: ListProvidersService
 
 describe('List providers', () => {
   beforeEach(async () => {
     fakeUsersRepository = new FakeUsersRepository()
-    listProvidersService = new ListProvidersService(fakeUsersRepository)
+    fakeCacheProvider = new FakeCacheProvider()
+    listProvidersService = new ListProvidersService(fakeUsersRepository, fakeCacheProvider)
   })
 
   it('Should be able to list all users except the one with given ID', async () => {
