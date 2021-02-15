@@ -5,3 +5,4 @@ tmp/*
 ormconfig.js
 coverage/
 build
+dist/

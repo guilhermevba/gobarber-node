@@ -12,6 +12,6 @@ export default class UsersAvatarController {
     })
 
 
-    return response.json({user: classToClass(user)})
+    return response.json(classToClass(user))
   }
 }

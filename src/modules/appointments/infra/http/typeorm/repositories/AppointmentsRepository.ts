@@ -48,8 +48,8 @@ export default class AppointmentRepository implements IAppointmentsRepository {
       where: {
         provider_id,
         date: Between(new Date(year, month-1, day, 0, 0), new Date(year, month-1, day + 1, 0, 0, -1 ))
-      }
-
+      },
+      relations: ['user']
     })
     return appointments
   }

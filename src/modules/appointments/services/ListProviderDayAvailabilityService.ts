@@ -41,6 +41,7 @@ export default class ListProviderDayAvailabilityService {
   ) {}
 
   public async execute({provider_id, day, month, year}: Request): Promise<IResponse> {
+
     const appointmentsOfDay = await this.appointmentRepository.findAllInDayOfProvider({
       provider_id, day, month, year
     })

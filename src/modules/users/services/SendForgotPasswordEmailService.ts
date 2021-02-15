@@ -23,7 +23,6 @@ export default class SendForgotPasswordEmailService{
 
   public async execute({email}: Request): Promise<void> {
     const foundUser = await this.usersRepository.findByEmail(email)
-
     if (!foundUser) {
       throw new AppError('User not found')
     }
@@ -34,7 +33,7 @@ export default class SendForgotPasswordEmailService{
       subject: '(Go Barber) Recuperação de senha',
       templateData: {
         file: forgotPasswordMailTemplateFile,
-        variables: {link: `${process.env.APP_WEB_URL}/reset_password?token=${token}`, name: foundUser.name}
+        variables: {link: `${process.env.APP_WEB_URL}/reset-password?token=${token}`, name: foundUser.name}
       },
       to: {
         name: foundUser.name,

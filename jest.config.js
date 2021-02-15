@@ -1,5 +1,3 @@
-const { pathsToModuleNameMapper } = require('ts-jest/utils')
-const { compilerOptions } = require('./tsconfig.json')
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
@@ -79,7 +77,13 @@ module.exports = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {prefix: '<rootDir>/src/'}),
+  moduleNameMapper: {
+    '^@notifications/(.*)$': '<rootDit>/src/modules/notifications/$1',
+    '^@appointments/(.*)$': '<rootDit>/src/modules/appointments/$1',
+    '^@users/(.*)$': '<rootDit>/src/modules/users/$1',
+    '^@config/(.*)$': '<rootDit>/src/config/$1',
+    '^@shared/(.*)$': '<rootDit>/src/shared/$1',
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],

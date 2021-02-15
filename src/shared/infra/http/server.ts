@@ -11,11 +11,11 @@ import '@shared/container'
 import rateLimiter from '@shared/infra/http/middlewares/rateLimiter'
 
 const app = express();
-app.use(rateLimiter)
 app.use(cors())
 app.use(express.json())
 
 app.use('/files',express.static(uploadConfig.directory))
+app.use(rateLimiter)
 app.get('/', (req, res) => {
   console.log('im alive')
   res.send('im alive')

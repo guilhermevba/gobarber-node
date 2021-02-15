@@ -3,6 +3,7 @@ import {inject, injectable} from 'tsyringe'
 import IAppointmentsRepository from '@appointments/repositories/IAppointmentsRepository';
 import Appointment from '@appointments/infra/http/typeorm/entities/appointment'
 import ICacheProvider from '@shared/providers/CacheProvider/models/ICacheProvider';
+import { classToClass } from 'class-transformer';
 
 interface Request{
   provider_id: string,
@@ -23,6 +24,7 @@ export default class ListProviderAppointmentsService {
 
   public async execute({provider_id, day, month, year}: Request): Promise<Appointment[]> {
     const cacheKey = `provider-appointments:${provider_id}:${year}-${month}-${day}`
+
     let appointments =  await this.cacheProvider.recover<Appointment[]>(cacheKey)
     if(!appointments) {
       appointments = await this.appointmentRepository.findAllInDayOfProvider({
@@ -31,7 +33,7 @@ export default class ListProviderAppointmentsService {
         year,
         provider_id
       })
-      console.log('query executed')
+      appointments = classToClass(appointments)
       await this.cacheProvider.save(cacheKey, appointments)
     }
     return appointments

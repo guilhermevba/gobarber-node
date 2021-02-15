@@ -24,7 +24,6 @@ export default class CreateUserService{
     ) {}
 
   public async execute({name, email, password}: Request): Promise<User> {
-    console.log(name, email, password)
     const existingEmail = await this.usersRepository.findByEmail(email)
     if (existingEmail) {
       throw new AppError('Email address already in use')
