@@ -1,7 +1,7 @@
 import IMailProvider from "../models/IMailProvider";
 import nodemailer, { Transporter } from 'nodemailer';
 import ISendMailDTO from "../dtos/ISendMailDTO";
-import IMailTemplateProvider from "shared/providers/MailTemplateProvider/models/IMailTemplateProvider";
+import IMailTemplateProvider from "@shared/providers/MailTemplateProvider/models/IMailTemplateProvider";
 import aws from 'aws-sdk'
 import mailConfig from '@config/mail'
 
