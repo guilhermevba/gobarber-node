@@ -1,24 +1,23 @@
-{
-  "module.exports": [
-    {
-    "name": "default",
-    "type": "postgres",
-    "host": "localhost",
-    "port": 5432,
-    "username": "postgres",
-    "password": "gostack",
-    "database": "gobarber",
-    "migrations": [
-      "./src/shared/infra/typeorm/migrations/*.ts"
-    ],
-    "cli": {
-      "migrationsDir": "./src/shared/infra/typeorm/migrations"
-    },
-    "entities": [
-      "@appointments/infra/http/typeorm/entities/appointment",
-      "@users/infra/http/typeorm/entities/User",
-      "@users/infra/http/typeorm/entities/UserToken"
-    ]
+[
+  {
+  "name": "default",
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "gostack",
+  "database": "gobarber",
+  "migrations": [
+    "./src/shared/infra/typeorm/migrations/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "./src/shared/infra/typeorm/migrations"
+  },
+  "entities": [
+    "@appointments/infra/http/typeorm/entities/appointment",
+    "@users/infra/http/typeorm/entities/User",
+    "@users/infra/http/typeorm/entities/UserToken"
+  ]
   }, {
     "name": "mongo",
     "type": "mongodb",
@@ -28,4 +27,3 @@
     "entities": ["@notifications/infra/typeorm/schemas/notification"]
   }
 ]
-}
