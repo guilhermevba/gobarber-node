@@ -2,7 +2,7 @@ node_modules
 tmp/*
 !tmp/.gitkeep
 .env
-ormconfig.js
+ormconfig.ts
 coverage/
 build
 dist/
