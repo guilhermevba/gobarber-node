@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 14.x
+        
+      - name: Install dependecies
+        run: npm install
+        
+      - name: Run build
+        run: npm build
+        
+      - name: Copy dist to Linode
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "dist"
+          target: "test"
+    # instalar dependencias NPM
+    # executar build
+    # copiar pasta dist para dentro do linode
+    # substituir o codigo existente pelo novo código
+    # executar npm i no linode
+    # executar migrations do typeorm
+    # restart servidor Node.js
