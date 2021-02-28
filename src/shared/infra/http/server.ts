@@ -17,8 +17,7 @@ app.use(express.json())
 app.use('/files',express.static(uploadConfig.directory))
 app.use(rateLimiter)
 app.get('/', (req, res) => {
-  console.log('im alive')
-  res.send('im alive')
+  res.send({name: 'go-barber', version: 1.0})
 })
 app.use(routes)
 
