@@ -33,10 +33,34 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           source: ".,!node_modules"
           target: "~/app/gobarber-node"
-    # instalar dependencias NPM
-    # executar build
-    # copiar pasta dist para dentro do linode
-    # substituir o codigo existente pelo novo código
-    # executar npm i no linode
-    # executar migrations do typeorm
-    # restart servidor Node.js
+          
+      - name: Install dependecies on Linode
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/app/gobarber-node
+            npm run build
+            
+      - name: Run migrations on Linode
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/app/gobarber-node
+            ./node_modules/.bin/typeorm migration:run
+  
+      - name: Restart service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: pm2 restart gobarber
